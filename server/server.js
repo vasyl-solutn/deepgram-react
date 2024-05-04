@@ -4,14 +4,15 @@ require('dotenv').config()
 const { Deepgram } = require('@deepgram/sdk')
 const deepgram = new Deepgram(process.env.DG_KEY)
 
-// Add WebSocket 
+// Add WebSocket
 const WebSocket = require('ws')
 const wss = new WebSocket.Server({ port: 3002 })
 
 // Open WebSocket Connection and initiate live transcription
 wss.on('connection', (ws) => {
 	const deepgramLive = deepgram.transcription.live({
-		interim_results: true,
+		interim_results: false,
+		language: "en-US",
 		punctuate: true,
 		endpointing: true,
 		vad_turnoff: 500,

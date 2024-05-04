@@ -11,13 +11,13 @@ export default function Affirmation() {
 	}
     const handleSubmit = (e) => {
 		e.preventDefault()
-	
+
 		setFinalAffirmation(true)
 	}
 	const activateMicrophone =  ( )  => {
 
 		console.log('Submit')
-		
+
 		//Add microphone access
 		navigator.mediaDevices.getUserMedia({ audio: true }).then((stream) => {
 			if (!MediaRecorder.isTypeSupported('audio/webm'))
@@ -40,6 +40,7 @@ export default function Affirmation() {
 
 			socket.onmessage = (message) => {
 				const received = JSON.parse(message.data)
+				// console.log({ event: 'onmessage', received })
 				const transcript = received.channel.alternatives[0].transcript
 				if (transcript) {
 					console.log(transcript)
@@ -58,7 +59,7 @@ export default function Affirmation() {
 			socketRef.current = socket
 		})
 		}
-		
+
 return(
     <div className='App'>
 <div>
@@ -66,8 +67,8 @@ return(
 </div>
 <div className="card ">
      <div className='container'>
-  
-  
+
+
 <div className='journal-body'>
 {!finalAffirmation ? (
 				<>
@@ -103,7 +104,7 @@ return(
 					<div className='description'>{affirmation}</div>
 				</>
 			)}
-         </div> 
+         </div>
          </div>
          </div>
          </div>
